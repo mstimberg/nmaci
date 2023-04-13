@@ -11,8 +11,10 @@ ARG = sys.argv[1]
 
 
 def main():
-    with open('tutorials/materials.yml') as fh:
+    with open('precourse/tutorials/materials.yml') as fh:
         materials = yaml.load(fh, Loader=yaml.FullLoader)
+    with open('tutorials/materials.yml') as fh:
+        materials += yaml.load(fh, Loader=yaml.FullLoader)
 
     # Make the dictionary that contains the chapters
     toc = {}
