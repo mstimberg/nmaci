@@ -27,11 +27,12 @@ def main():
     art_file_list = os.listdir('tutorials/Art/')
 
     for m in materials:
-        directory = f"{m['day']}_{''.join(m['name'].split())}"
+        directory = f"tutorials/{m['day']}_{''.join(m['name'].split())}"
+        if m['day'].startswith('W0'):  # precourse
+            directory = "precourse/" + directory
 
         # Make temporary chapter title file
-        with open(f"tutorials/{directory}/chapter_title.md",
-                  "w+") as title_file:
+        with open(f"{directory}/chapter_title.md", "w+") as title_file:
             title_page = f"# {m['name']}"
             art_file = [fname for fname in art_file_list if m['day'] in fname]
             if len(art_file) == 1:
@@ -40,12 +41,11 @@ def main():
                 title_page += f"\n\n ````{{div}} full-width \n <img src='../Art/{art_file[0]}' alt='art relevant to chapter contents' width='100%'> \n```` \n\n*Artwork by {artist}*"
             title_file.write(title_page)
 
-        chapter = {'file': f"tutorials/{directory}/chapter_title.md",
+        chapter = {'file': f"{directory}/chapter_title.md",
                    'title': f"{m['name']} ({m['day']})",
                    'sections': []}
         print(m['day'])
         part = m['category']
-        directory = f"tutorials/{m['day']}_{''.join(m['name'].split())}"
 
         # Make list of notebook sections
         notebook_list = []
@@ -151,7 +151,7 @@ def main():
     toc_list += [chapter]
 
     # Pre-reqs file
-    chapter = {'chapters': [{'file': 'prereqs/ComputationalNeuroscience.md'}]}
+    chapter = {'chapters': [{'file': 'precourse/prereqs/ComputationalNeuroscience.md'}]}
     toc_list += [chapter]
 
     for key in toc.keys():
