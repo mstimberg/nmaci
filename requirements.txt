@@ -9,5 +9,4 @@ beautifulsoup4~=4.12
 decorator~=5.1
 Jinja2~=3.1
 jupyter-book~=0.15
-ghp-import~=2.1
 jupyter_client~=8.1
